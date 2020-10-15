@@ -1,0 +1,53 @@
+pipeline {
+    agent{
+        label 'agent_maven'
+    }
+    stages {
+        stage('launch job 1') {
+            steps {
+                script {
+                    sh("pwd")
+                    input_message = input message: "select an option", ok: "next",
+                    parameters:[
+                        choice(name: "choice_option", choices:["one","two","three"], description:"")    
+                    ]
+                    echo "Selected:  " + input_message
+                }
+            }
+        }
+    
+        stage('select one') {
+            when {
+                expression { input_message == 'one' }
+            }
+            steps {
+                script {
+                    echo "Selected one"
+                }
+            }
+        }
+        
+        stage('select two') {
+            when {
+                expression { input_message == 'two' }
+            }
+            steps {
+                script {
+                    echo "Selected two"
+                }
+            }
+        }
+        
+        stage('select three') {
+            when {
+                expression { input_message == 'three' }
+            }
+            steps {
+                script {
+                    echo "Selected three"
+                }
+            }
+        }        
+
+    }
+}
