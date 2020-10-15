@@ -15,7 +15,7 @@ pipeline {
                     }
                     steps {
                         echo "On first parallel"
-                        sleep 40
+                        sleep 6
                         echo "end of first paralel"
                     }
                 }
@@ -26,7 +26,7 @@ pipeline {
                     }
                     steps {
                         echo "On second parallel"
-                        sleep 50
+                        sleep 5
                         echo "end of second paralel"
                     }
                 }
@@ -37,7 +37,7 @@ pipeline {
                     }
                     steps {
                         echo "On third parallel"
-                        sleep 60
+                        sleep 6
                         echo "end of third paralel"
                     }
                 }
