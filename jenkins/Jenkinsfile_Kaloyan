@@ -1,0 +1,29 @@
+pipeline {
+    agent {
+        label 'agent_maven'
+    }
+    stages {
+        stage('Build') {
+            steps {
+                script {
+                    IMAGE = readMavenPom().getArtifactId()
+                    VERSION = readMavenPom().getVersion()
+                    echo IMAGE
+                    echo VERSION
+                    sh 'mvn -B -DskipTests clean package'
+                }
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+                sh 'probando ando'
+            }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
+                }
+            }
+        }
+    }
+}
